@@ -49,9 +49,9 @@ Public showcase site for student workshop projects. Visitors browse a lightweigh
 
 ### Slug rules
 
-- Strip diacritics, lowercase, replace non-alphanumeric runs with `-`, trim `-`
+- Generated via [`slugify`](https://www.npmjs.com/package/slugify) (`lower: true`, `strict: true`) from `student` + `title`
 - Duplicate slugs → **build fails** with clear error
-- Empty title: slug uses student name + row index (e.g. `ashlyn-mochi-1`)
+- Empty title: `slugify(student)` + CSV row index (e.g. `ashlyn-mochi-13`)
 
 ### URL normalization (build time)
 
