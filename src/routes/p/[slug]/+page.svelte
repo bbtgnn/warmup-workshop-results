@@ -23,6 +23,16 @@
 		return () => clearTimeout(timeoutId);
 	});
 
+	$effect(() => {
+		if (!project) return;
+		document.documentElement.classList.add('embed-viewer');
+		document.body.classList.add('embed-viewer');
+		return () => {
+			document.documentElement.classList.remove('embed-viewer');
+			document.body.classList.remove('embed-viewer');
+		};
+	});
+
 	function onLoad() {
 		loading = false;
 		embedFailed = false;
@@ -76,10 +86,22 @@
 {/if}
 
 <style>
+	:global(html.embed-viewer),
+	:global(body.embed-viewer) {
+		overflow: hidden;
+		overscroll-behavior: none;
+		position: fixed;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+	}
+
 	.viewer {
 		display: flex;
 		flex-direction: column;
-		height: 100dvh;
+		position: fixed;
+		inset: 0;
+		overflow: hidden;
 	}
 
 	.topbar {
@@ -130,6 +152,9 @@
 		position: relative;
 		flex: 1;
 		min-height: 0;
+		overflow: hidden;
+		overscroll-behavior: none;
+		touch-action: none;
 	}
 
 	iframe {
@@ -137,6 +162,7 @@
 		height: 100%;
 		border: 0;
 		display: block;
+		touch-action: none;
 	}
 
 	iframe.hidden {
