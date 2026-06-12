@@ -1,9 +1,14 @@
 <script lang="ts">
+	import { base } from '$app/paths';
 	import { projects } from '$lib/projects';
 	import ProjectCard from '$lib/components/ProjectCard.svelte';
 </script>
 
 <main class="gallery">
+	<div class="top-row">
+		<a class="subvert-btn" href="{base}/subvert">SUBVERT</a>
+	</div>
+
 	<header>
 		<h1>warmup</h1>
 		<p class="subtitle">Settimana di workshop · #ABAMC</p>
@@ -18,9 +23,35 @@
 
 <style>
 	.gallery {
+		position: relative;
 		padding: 2rem clamp(1rem, 4vw, 3rem) 3rem;
 		max-width: 1400px;
 		margin: 0 auto;
+	}
+
+	.top-row {
+		display: flex;
+		justify-content: flex-end;
+		margin-bottom: -1rem;
+	}
+
+	.subvert-btn {
+		display: inline-block;
+		background: #000;
+		color: #fff;
+		border: 2px solid #000;
+		padding: 0.6rem 1.25rem;
+		font: inherit;
+		font-weight: 900;
+		font-size: 1rem;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		text-decoration: none;
+	}
+
+	.subvert-btn:hover {
+		background: #fff;
+		color: #000;
 	}
 
 	header {
