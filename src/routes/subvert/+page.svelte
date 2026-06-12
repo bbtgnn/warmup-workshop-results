@@ -46,19 +46,21 @@
 
 <style>
 	.subvert {
-		min-height: 100dvh;
+		height: 100dvh;
 		display: flex;
 		flex-direction: column;
-		padding: 0 1rem 1.5rem;
+		padding: 0 0.5rem 0.5rem;
+		overflow: hidden;
 	}
 
 	.topbar {
+		flex-shrink: 0;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		padding: 0.75rem 0;
+		padding: 0.5rem 0;
 		border-bottom: var(--border);
-		margin-bottom: 1rem;
+		margin-bottom: 0.5rem;
 	}
 
 	.desktop-hint {
@@ -76,13 +78,16 @@
 		grid-template-columns: 1fr 1fr 1fr;
 		gap: 0;
 		min-height: 0;
+		align-items: stretch;
 	}
 
 	.pager {
+		flex-shrink: 0;
 		display: flex;
 		justify-content: center;
 		gap: 1rem;
-		margin-top: 1.25rem;
+		margin-top: 0.5rem;
+		padding-top: 0.25rem;
 	}
 
 	.empty {

@@ -13,12 +13,15 @@ export function ringSlice<T>(items: T[], pageIndex: number, pageSize = PAGE_SIZE
 	return Array.from({ length: pageSize }, (_, i) => items[(start + i) % n]);
 }
 
+const ACID_HUES = [52, 85, 120, 165, 195, 280, 305, 330];
+
 export function randomSectionColors(count = PAGE_SIZE): string[] {
 	const colors: string[] = [];
 	while (colors.length < count) {
-		const h = Math.floor(Math.random() * 360);
-		const s = 55 + Math.floor(Math.random() * 25);
-		const l = 72 + Math.floor(Math.random() * 18);
+		const base = ACID_HUES[Math.floor(Math.random() * ACID_HUES.length)];
+		const h = (base + Math.floor(Math.random() * 24) - 12 + 360) % 360;
+		const s = 100;
+		const l = 46 + Math.floor(Math.random() * 14);
 		const color = `hsl(${h} ${s}% ${l}%)`;
 		if (!colors.includes(color)) colors.push(color);
 	}

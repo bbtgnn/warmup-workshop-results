@@ -15,7 +15,7 @@
 </script>
 
 <section class="column" style:background>
-	<EmbedFrame title={displayTitle} url={poster.url} />
+	<EmbedFrame title={displayTitle} url={poster.url} class="fill-column" />
 	<div class="meta">
 		<h1>{displayTitle}</h1>
 		<h3>{poster.teamName}</h3>
@@ -33,37 +33,48 @@
 		display: flex;
 		flex-direction: column;
 		min-width: 0;
-		padding: 1rem;
-		color: #111;
+		height: 100%;
+		min-height: 0;
+		padding: 0.5rem;
+		color: #fff;
+	}
+
+	.column :global(.fill-column.frame-wrap) {
+		flex: 1;
+		min-height: 0;
+		aspect-ratio: unset;
+		height: auto;
 	}
 
 	.meta {
-		margin-top: 0.75rem;
+		flex-shrink: 0;
+		margin-top: 0.5rem;
+		text-shadow: 0 1px 3px rgb(0 0 0 / 0.45);
 	}
 
 	h1 {
-		margin: 0 0 0.35rem;
-		font-size: 1.25rem;
+		margin: 0 0 0.25rem;
+		font-size: 1.1rem;
 		font-weight: 900;
 		text-transform: uppercase;
 		letter-spacing: 0.02em;
 	}
 
 	h3 {
-		margin: 0 0 0.5rem;
-		font-size: 0.95rem;
+		margin: 0 0 0.35rem;
+		font-size: 0.85rem;
 		font-weight: 700;
 	}
 
 	p {
-		margin: 0 0 0.5rem;
-		font-size: 0.9rem;
+		margin: 0 0 0.35rem;
+		font-size: 0.8rem;
 		line-height: 1.45;
 	}
 
 	small {
 		display: block;
-		font-size: 0.75rem;
+		font-size: 0.7rem;
 		opacity: 0.85;
 		line-height: 1.4;
 	}

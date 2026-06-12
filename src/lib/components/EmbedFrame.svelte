@@ -57,6 +57,13 @@
 		background: #111;
 	}
 
+	:global(.fill-column.frame-wrap) {
+		flex: 1;
+		min-height: 0;
+		aspect-ratio: unset;
+		height: auto;
+	}
+
 	iframe {
 		width: 100%;
 		height: 100%;
