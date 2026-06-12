@@ -43,7 +43,8 @@ function parseCsv(text: string): Array<{ student: string; title: string; url: st
 		if (parts.length < 3) continue;
 		const student = parts[0].trim();
 		const title = parts[1].trim();
-		const url = parts.slice(2).join(',').trim();
+		// Column 4+ (e.g. REGISTRAZIONE SCHERMO?) is metadata — link is column 3 only.
+		const url = parts[2].trim();
 		rows.push({ student, title, url });
 	}
 	return rows;
