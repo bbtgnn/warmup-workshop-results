@@ -87,7 +87,7 @@
     "slug": "francesco-di-cicco-how-to-disappear-completely",
     "student": "Francesco di Cicco",
     "title": "How to disappear completely",
-    "url": "https://github.com/fdcfrancescodicicco-coder/poster",
+    "url": "https://fdcfrancescodicicco-coder.github.io/poster/",
     "thumbnail": null
   },
   {
@@ -228,6 +228,20 @@
     "student": "Claudia Meirosu",
     "title": "Tanti fanculo",
     "url": "https://clxudia21.github.io/tired/",
+    "thumbnail": null
+  },
+  {
+    "slug": "alexander-marinov-eurovision-sofia-2027",
+    "student": "Alexander Marinov",
+    "title": "Eurovision Sofia 2027",
+    "url": "https://dws5cbvvfp-code.github.io/poster-eurovision/",
+    "thumbnail": null
+  },
+  {
+    "slug": "tommaso-miconi-simulatore-di-ludopatia",
+    "student": "Tommaso Miconi",
+    "title": "Simulatore di Ludopatia",
+    "url": "https://tommasomiconi-star.github.io/gratta-e-vinci/",
     "thumbnail": null
   }
 ]
