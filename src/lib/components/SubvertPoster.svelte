@@ -36,7 +36,7 @@
 		height: 100%;
 		min-height: 0;
 		padding: 0.5rem;
-		color: #fff;
+		color: #000;
 	}
 
 	.column :global(.fill-column.frame-wrap) {
@@ -46,36 +46,38 @@
 		height: auto;
 	}
 
+	.column :global(.overlay) {
+		font-family: inherit;
+		font-size: 0.45rem;
+		line-height: 1.6;
+	}
+
 	.meta {
 		flex-shrink: 0;
 		margin-top: 0.5rem;
-		text-shadow: 0 1px 3px rgb(0 0 0 / 0.45);
 	}
 
 	h1 {
-		margin: 0 0 0.25rem;
-		font-size: 1.1rem;
-		font-weight: 900;
-		text-transform: uppercase;
-		letter-spacing: 0.02em;
+		margin: 0 0 0.5rem;
+		font-size: 0.6rem;
+		line-height: 1.5;
 	}
 
 	h3 {
-		margin: 0 0 0.35rem;
-		font-size: 0.85rem;
-		font-weight: 700;
+		margin: 0 0 0.5rem;
+		font-size: 0.5rem;
+		line-height: 1.5;
 	}
 
 	p {
-		margin: 0 0 0.35rem;
-		font-size: 0.8rem;
-		line-height: 1.45;
+		margin: 0 0 0.5rem;
+		font-size: 0.45rem;
+		line-height: 1.6;
 	}
 
 	small {
 		display: block;
-		font-size: 0.7rem;
-		opacity: 0.85;
-		line-height: 1.4;
+		font-size: 0.4rem;
+		line-height: 1.6;
 	}
 </style>

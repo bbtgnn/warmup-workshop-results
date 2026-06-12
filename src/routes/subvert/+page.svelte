@@ -1,23 +1,39 @@
 <script lang="ts">
 	import { base } from '$app/paths';
 	import SubvertPoster from '$lib/components/SubvertPoster.svelte';
-	import { posters, ringSlice, randomSectionColors } from '$lib/subvert';
+	import SubvertTitleSlide from '$lib/components/SubvertTitleSlide.svelte';
+	import { posters, buildSubvertPages, randomSectionColors } from '$lib/subvert';
 
 	let pageIndex = $state(0);
-	let colors = $state(randomSectionColors());
 
-	const visible = $derived(ringSlice(posters, pageIndex));
+	const pages = $derived(buildSubvertPages(posters));
+	const visible = $derived(pages[pageIndex] ?? []);
+	const colors = $derived.by(() => {
+		pageIndex;
+		return randomSectionColors(visible.length || 3);
+	});
+	const atStart = $derived(pageIndex === 0);
+	const atEnd = $derived(pageIndex >= pages.length - 1);
 
 	function goPrev() {
+		if (atStart) return;
 		pageIndex -= 1;
-		colors = randomSectionColors();
 	}
 
 	function goNext() {
+		if (atEnd) return;
 		pageIndex += 1;
-		colors = randomSectionColors();
 	}
 </script>
+
+<svelte:head>
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+	<link
+		href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+		rel="stylesheet"
+	/>
+</svelte:head>
 
 <main class="subvert">
 	<header class="topbar">
@@ -31,15 +47,19 @@
 			<a class="btn" href="{base}/">Back to gallery</a>
 		</div>
 	{:else}
-		<div class="columns">
-			{#each visible as poster, i (poster.slug + '-' + pageIndex + '-' + i)}
-				<SubvertPoster {poster} background={colors[i]} />
+		<div class="columns" style:--slot-count={visible.length}>
+			{#each visible as slot, i (`${pageIndex}-${i}-${slot.type === 'title' ? 'title' : slot.poster.slug}`)}
+				{#if slot.type === 'title'}
+					<SubvertTitleSlide />
+				{:else}
+					<SubvertPoster poster={slot.poster} background={colors[i]} />
+				{/if}
 			{/each}
 		</div>
 
 		<nav class="pager">
-			<button class="btn" type="button" onclick={goPrev}>← Prev</button>
-			<button class="btn" type="button" onclick={goNext}>Next →</button>
+			<button class="btn" type="button" onclick={goPrev} disabled={atStart}>← Prev</button>
+			<button class="btn" type="button" onclick={goNext} disabled={atEnd}>Next →</button>
 		</nav>
 	{/if}
 </main>
@@ -51,6 +71,8 @@
 		flex-direction: column;
 		padding: 0 0.5rem 0.5rem;
 		overflow: hidden;
+		font-family: 'Press Start 2P', monospace;
+		line-height: 1.6;
 	}
 
 	.topbar {
@@ -65,17 +87,15 @@
 
 	.desktop-hint {
 		margin: 0;
-		font-size: 0.7rem;
-		font-weight: 700;
-		text-transform: uppercase;
-		letter-spacing: 0.1em;
+		font-size: 0.5rem;
+		text-transform: lowercase;
 		color: var(--fg-muted);
 	}
 
 	.columns {
 		flex: 1;
 		display: grid;
-		grid-template-columns: 1fr 1fr 1fr;
+		grid-template-columns: repeat(var(--slot-count, 3), 1fr);
 		gap: 0;
 		min-height: 0;
 		align-items: stretch;
@@ -96,26 +116,27 @@
 		place-content: center;
 		gap: 1rem;
 		text-align: center;
-		font-weight: 700;
-		text-transform: uppercase;
+		font-size: 0.55rem;
 	}
 
 	.btn {
 		background: transparent;
 		color: var(--fg);
 		border: var(--border);
-		padding: 0.35rem 0.75rem;
+		padding: 0.5rem 0.75rem;
 		font: inherit;
-		font-weight: 700;
-		font-size: 0.8rem;
-		text-transform: uppercase;
-		letter-spacing: 0.06em;
+		font-size: 0.55rem;
 		cursor: pointer;
 		text-decoration: none;
 	}
 
-	.btn:hover {
+	.btn:hover:not(:disabled) {
 		background: var(--fg);
 		color: var(--bg);
+	}
+
+	.btn:disabled {
+		opacity: 0.35;
+		cursor: not-allowed;
 	}
 </style>
