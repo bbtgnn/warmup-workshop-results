@@ -9,7 +9,8 @@ const PAGE_SIZE = 3;
 export function ringSlice<T>(items: T[], pageIndex: number, pageSize = PAGE_SIZE): T[] {
 	const n = items.length;
 	if (n === 0) return [];
-	return Array.from({ length: pageSize }, (_, i) => items[(pageIndex * pageSize + i) % n]);
+	const start = ((pageIndex * pageSize) % n + n) % n;
+	return Array.from({ length: pageSize }, (_, i) => items[(start + i) % n]);
 }
 
 export function randomSectionColors(count = PAGE_SIZE): string[] {
