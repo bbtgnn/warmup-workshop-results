@@ -6,6 +6,9 @@ export const posters: SubvertPoster[] = subvertData;
 
 export type EmbedContainSize = { width: number; height: number };
 
+/** Standard portrait poster proportions for line view and scale-to-fit embeds. */
+export const PORTRAIT_EMBED_SIZE: EmbedContainSize = { width: 1080, height: 1920 };
+
 /** Native page size for portrait embeds that need scale-to-fit in landscape frames. */
 const EMBED_CONTAIN_SIZES: Record<string, EmbedContainSize> = {
 	'siamo-alla-frutta': { width: 601, height: 889 }
@@ -40,6 +43,11 @@ function groupPostersByTeam(items: SubvertPoster[]): SubvertPoster[][] {
 	}
 
 	return order.map((slug) => byGroup.get(slug)!);
+}
+
+/** First poster per studio group — the five main SUBVERT entries. */
+export function getMainPosters(items: SubvertPoster[]): SubvertPoster[] {
+	return groupPostersByTeam(items).map((group) => group[0]);
 }
 
 /** Page 1: title + first link for 2 groups. Page 2: first link for 3 groups. Then extra links, 3 per page. */

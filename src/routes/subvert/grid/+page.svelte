@@ -45,6 +45,7 @@
 		<div class="topbar-left">
 			<a class="btn" href="{base}/">← Gallery</a>
 			<a class="btn" href="{base}/subvert">Columns view</a>
+			<a class="btn" href="{base}/subvert/line">Line view</a>
 		</div>
 		<p class="desktop-hint">best on desktop</p>
 	</header>

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { buildSubvertPages, buildSubvertGridPages } from './subvert';
+import { buildSubvertPages, buildSubvertGridPages, getMainPosters } from './subvert';
 import type { SubvertPoster } from './subvert';
 
 function poster(groupSlug: string, slug: string, linkIndex = 0): SubvertPoster {
@@ -13,6 +13,31 @@ function poster(groupSlug: string, slug: string, linkIndex = 0): SubvertPoster {
 		members: []
 	};
 }
+
+describe('getMainPosters', () => {
+	const fiveGroups = [
+		poster('a', 'a-1'),
+		poster('a', 'a-2'),
+		poster('b', 'b-1'),
+		poster('c', 'c-1'),
+		poster('d', 'd-1'),
+		poster('e', 'e-1')
+	];
+
+	it('returns the first poster from each group', () => {
+		expect(getMainPosters(fiveGroups)).toEqual([
+			fiveGroups[0],
+			fiveGroups[2],
+			fiveGroups[3],
+			fiveGroups[4],
+			fiveGroups[5]
+		]);
+	});
+
+	it('returns empty array when there are no posters', () => {
+		expect(getMainPosters([])).toEqual([]);
+	});
+});
 
 describe('buildSubvertPages', () => {
 	const fiveGroups = [

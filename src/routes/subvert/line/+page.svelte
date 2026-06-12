@@ -1,29 +1,10 @@
 <script lang="ts">
 	import { base } from '$app/paths';
 	import SubvertPoster from '$lib/components/SubvertPoster.svelte';
-	import SubvertTitleSlide from '$lib/components/SubvertTitleSlide.svelte';
-	import { posters, buildSubvertPages, randomSectionColors } from '$lib/subvert';
+	import { posters, getMainPosters, randomSectionColors } from '$lib/subvert';
 
-	let pageIndex = $state(0);
-
-	const pages = $derived(buildSubvertPages(posters));
-	const visible = $derived(pages[pageIndex] ?? []);
-	const colors = $derived.by(() => {
-		pageIndex;
-		return randomSectionColors(visible.length || 3);
-	});
-	const atStart = $derived(pageIndex === 0);
-	const atEnd = $derived(pageIndex >= pages.length - 1);
-
-	function goPrev() {
-		if (atStart) return;
-		pageIndex -= 1;
-	}
-
-	function goNext() {
-		if (atEnd) return;
-		pageIndex += 1;
-	}
+	const mainPosters = $derived(getMainPosters(posters));
+	const colors = $derived(randomSectionColors(mainPosters.length || 5));
 </script>
 
 <svelte:head>
@@ -39,32 +20,23 @@
 	<header class="topbar">
 		<div class="topbar-left">
 			<a class="btn" href="{base}/">← Gallery</a>
+			<a class="btn" href="{base}/subvert">Columns view</a>
 			<a class="btn" href="{base}/subvert/grid">Grid view</a>
-			<a class="btn" href="{base}/subvert/line">Line view</a>
 		</div>
 		<p class="desktop-hint">best on desktop</p>
 	</header>
 
-	{#if posters.length === 0}
+	{#if mainPosters.length === 0}
 		<div class="empty">
 			<p>No SUBVERT posters yet.</p>
 			<a class="btn" href="{base}/">Back to gallery</a>
 		</div>
 	{:else}
-		<div class="columns" style:--slot-count={visible.length}>
-			{#each visible as slot, i (`${pageIndex}-${i}-${slot.type === 'title' ? 'title' : slot.poster.slug}`)}
-				{#if slot.type === 'title'}
-					<SubvertTitleSlide />
-				{:else}
-					<SubvertPoster poster={slot.poster} background={colors[i]} />
-				{/if}
+		<div class="line">
+			{#each mainPosters as poster, i (poster.slug)}
+				<SubvertPoster {poster} background={colors[i]} portraitFrame />
 			{/each}
 		</div>
-
-		<nav class="pager">
-			<button class="btn" type="button" onclick={goPrev} disabled={atStart}>← Prev</button>
-			<button class="btn" type="button" onclick={goNext} disabled={atEnd}>Next →</button>
-		</nav>
 	{/if}
 </main>
 
@@ -101,22 +73,14 @@
 		color: var(--fg-muted);
 	}
 
-	.columns {
+	.line {
 		flex: 1;
 		display: grid;
-		grid-template-columns: repeat(var(--slot-count, 3), 1fr);
+		grid-template-columns: repeat(5, 1fr);
+		grid-template-rows: 1fr;
 		gap: 0;
 		min-height: 0;
 		align-items: stretch;
-	}
-
-	.pager {
-		flex-shrink: 0;
-		display: flex;
-		justify-content: center;
-		gap: 1rem;
-		margin-top: 0.5rem;
-		padding-top: 0.25rem;
 	}
 
 	.empty {
@@ -142,10 +106,5 @@
 	.btn:hover:not(:disabled) {
 		background: var(--fg);
 		color: var(--bg);
-	}
-
-	.btn:disabled {
-		opacity: 0.35;
-		cursor: not-allowed;
 	}
 </style>
