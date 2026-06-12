@@ -5,6 +5,7 @@
 	"type": "module",
 	"scripts": {
 		"dev": "vite dev",
+		"predev": "tsx scripts/build-projects.ts && tsx scripts/build-subvert.ts",
 		"prebuild": "tsx scripts/build-projects.ts && tsx scripts/build-subvert.ts",
 		"build": "vite build",
 		"preview": "vite preview",

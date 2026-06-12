@@ -41,7 +41,7 @@
 	}
 
 	.media {
-		aspect-ratio: 16 / 10;
+		aspect-ratio: 1 / 1;
 		display: grid;
 		place-items: center;
 		border: 1px solid var(--fg);
@@ -49,9 +49,9 @@
 	}
 
 	.media img {
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
+		max-width: 100%;
+		max-height: 100%;
+		object-fit: contain;
 	}
 
 	.placeholder-icon {

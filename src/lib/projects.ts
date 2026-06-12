@@ -15,3 +15,22 @@ export function randomSlug(current?: string): string {
 			: projects;
 	return pool[Math.floor(Math.random() * pool.length)].slug;
 }
+
+function shuffle<T>(items: T[]): T[] {
+	const copy = [...items];
+	for (let i = copy.length - 1; i > 0; i--) {
+		const j = Math.floor(Math.random() * (i + 1));
+		[copy[i], copy[j]] = [copy[j], copy[i]];
+	}
+	return copy;
+}
+
+export function sortGalleryProjects(
+	items: Project[],
+	{ random = false }: { random?: boolean } = {}
+): Project[] {
+	const withThumb = items.filter((p) => p.thumbnail !== null);
+	const withoutThumb = items.filter((p) => !p.thumbnail);
+	const order = random ? shuffle : <T>(list: T[]) => list;
+	return [...order(withThumb), ...order(withoutThumb)];
+}

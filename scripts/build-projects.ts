@@ -8,6 +8,7 @@ const ROOT = join(__dirname, '..');
 const CSV_PATH = join(ROOT, 'source.csv');
 const OUT_PATH = join(ROOT, 'src/lib/projects.json');
 const THUMB_DIR = join(ROOT, 'static/thumbnails');
+const GIF_DIR = join(ROOT, 'static/gifs');
 const BASE = '/warmup-results';
 
 export type Project = {
@@ -33,9 +34,11 @@ export function makeSlug(student: string, title: string, rowIndex: number): stri
 	return slugify(`${student} ${trimmedTitle}`, { lower: true, strict: true });
 }
 
-function parseCsv(text: string): Array<{ student: string; title: string; url: string }> {
+function parseCsv(
+	text: string
+): Array<{ student: string; title: string; url: string; preview?: string }> {
 	const lines = text.trim().split(/\r?\n/);
-	const rows: Array<{ student: string; title: string; url: string }> = [];
+	const rows: Array<{ student: string; title: string; url: string; preview?: string }> = [];
 	for (let i = 1; i < lines.length; i++) {
 		const line = lines[i].trim();
 		if (!line) continue;
@@ -43,19 +46,39 @@ function parseCsv(text: string): Array<{ student: string; title: string; url: st
 		if (parts.length < 3) continue;
 		const student = parts[0].trim();
 		const title = parts[1].trim();
-		// Column 4+ (e.g. REGISTRAZIONE SCHERMO?) is metadata — link is column 3 only.
+		// Column 4 (REGISTRAZIONE SCHERMO?) is metadata — link is column 3 only.
 		const url = parts[2].trim();
-		rows.push({ student, title, url });
+		const preview = parts[4]?.trim() || undefined;
+		rows.push({ student, title, url, preview });
 	}
 	return rows;
 }
 
-function resolveThumbnail(slug: string): string | null {
+function resolveSlugThumbnail(slug: string): string | null {
 	const exts = ['png', 'gif', 'webp'];
 	for (const ext of exts) {
 		const file = join(THUMB_DIR, `${slug}.${ext}`);
 		if (existsSync(file)) return `${BASE}/thumbnails/${slug}.${ext}`;
 	}
+	return null;
+}
+
+export function resolvePreview(filename: string): string | null {
+	const trimmed = filename.trim();
+	if (!trimmed) return null;
+	const name = /\.[a-z0-9]+$/i.test(trimmed) ? trimmed : `${trimmed}.gif`;
+	const file = join(GIF_DIR, name);
+	if (!existsSync(file)) {
+		console.warn(`[build-projects] preview file not found: ${name}`);
+		return null;
+	}
+	return `${BASE}/gifs/${name}`;
+}
+
+function resolveThumbnail(slug: string, preview?: string): string | null {
+	const slugThumb = resolveSlugThumbnail(slug);
+	if (slugThumb) return slugThumb;
+	if (preview) return resolvePreview(preview);
 	return null;
 }
 
@@ -84,7 +107,7 @@ function build(): Project[] {
 			student: row.student,
 			title: row.title.trim() || 'Untitled',
 			url,
-			thumbnail: resolveThumbnail(slug)
+			thumbnail: resolveThumbnail(slug, row.preview)
 		});
 	});
 

@@ -1,7 +1,14 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import { base } from '$app/paths';
-	import { projects } from '$lib/projects';
+	import { projects, sortGalleryProjects } from '$lib/projects';
 	import ProjectCard from '$lib/components/ProjectCard.svelte';
+
+	let galleryProjects = $state(sortGalleryProjects(projects));
+
+	onMount(() => {
+		galleryProjects = sortGalleryProjects(projects, { random: true });
+	});
 </script>
 
 <main class="gallery">
@@ -15,7 +22,7 @@
 	</header>
 
 	<div class="grid">
-		{#each projects as project (project.slug)}
+		{#each galleryProjects as project (project.slug)}
 			<ProjectCard {project} />
 		{/each}
 	</div>
