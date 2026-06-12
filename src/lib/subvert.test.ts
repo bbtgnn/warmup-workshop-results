@@ -1,18 +1,53 @@
 import { describe, it, expect } from 'vitest';
-import { ringSlice } from './subvert';
+import { buildSubvertPages } from './subvert';
+import type { SubvertPoster } from './subvert';
 
-describe('ringSlice', () => {
-	const items = ['a', 'b', 'c', 'd', 'e'];
+function poster(groupSlug: string, slug: string, linkIndex = 0): SubvertPoster {
+	return {
+		slug,
+		title: slug,
+		description: '',
+		url: `https://example.com/${slug}`,
+		groupSlug,
+		teamName: groupSlug,
+		members: []
+	};
+}
 
-	it('returns first page at pageIndex 0', () => {
-		expect(ringSlice(items, 0)).toEqual(['a', 'b', 'c']);
+describe('buildSubvertPages', () => {
+	const fiveGroups = [
+		poster('a', 'a-1'),
+		poster('a', 'a-2'),
+		poster('b', 'b-1'),
+		poster('c', 'c-1'),
+		poster('d', 'd-1'),
+		poster('e', 'e-1')
+	];
+
+	it('puts title plus two first links on page one', () => {
+		const pages = buildSubvertPages(fiveGroups);
+		expect(pages[0]).toEqual([
+			{ type: 'title' },
+			{ type: 'poster', poster: fiveGroups[0] },
+			{ type: 'poster', poster: fiveGroups[2] }
+		]);
 	});
 
-	it('wraps forward at pageIndex 1', () => {
-		expect(ringSlice(items, 1)).toEqual(['d', 'e', 'a']);
+	it('puts three remaining first links on page two', () => {
+		const pages = buildSubvertPages(fiveGroups);
+		expect(pages[1]).toEqual([
+			{ type: 'poster', poster: fiveGroups[3] },
+			{ type: 'poster', poster: fiveGroups[4] },
+			{ type: 'poster', poster: fiveGroups[5] }
+		]);
 	});
 
-	it('wraps backward at pageIndex -1', () => {
-		expect(ringSlice(items, -1)).toEqual(['c', 'd', 'e']);
+	it('puts extra links on later pages', () => {
+		const pages = buildSubvertPages(fiveGroups);
+		expect(pages[2]).toEqual([{ type: 'poster', poster: fiveGroups[1] }]);
+	});
+
+	it('returns empty array when there are no posters', () => {
+		expect(buildSubvertPages([])).toEqual([]);
 	});
 });

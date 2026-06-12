@@ -6,11 +6,50 @@ export const posters: SubvertPoster[] = subvertData;
 
 const PAGE_SIZE = 3;
 
-export function ringSlice<T>(items: T[], pageIndex: number, pageSize = PAGE_SIZE): T[] {
-	const n = items.length;
-	if (n === 0) return [];
-	const start = ((pageIndex * pageSize) % n + n) % n;
-	return Array.from({ length: pageSize }, (_, i) => items[(start + i) % n]);
+export type SubvertSlot =
+	| { type: 'title' }
+	| { type: 'poster'; poster: SubvertPoster };
+
+function groupPostersByTeam(items: SubvertPoster[]): SubvertPoster[][] {
+	const order: string[] = [];
+	const byGroup = new Map<string, SubvertPoster[]>();
+
+	for (const poster of items) {
+		if (!byGroup.has(poster.groupSlug)) {
+			order.push(poster.groupSlug);
+			byGroup.set(poster.groupSlug, []);
+		}
+		byGroup.get(poster.groupSlug)!.push(poster);
+	}
+
+	return order.map((slug) => byGroup.get(slug)!);
+}
+
+/** Page 1: title + first link for 2 groups. Page 2: first link for 3 groups. Then extra links, 3 per page. */
+export function buildSubvertPages(items: SubvertPoster[]): SubvertSlot[][] {
+	if (items.length === 0) return [];
+
+	const groups = groupPostersByTeam(items);
+	const firstLinks = groups.map((group) => group[0]);
+	const overflow = groups.flatMap((group) => group.slice(1));
+	const pages: SubvertSlot[][] = [];
+
+	const pageOne: SubvertSlot[] = [{ type: 'title' }];
+	for (const poster of firstLinks.slice(0, 2)) {
+		pageOne.push({ type: 'poster', poster });
+	}
+	pages.push(pageOne);
+
+	const pageTwo = firstLinks.slice(2, 5).map((poster) => ({ type: 'poster' as const, poster }));
+	if (pageTwo.length > 0) pages.push(pageTwo);
+
+	for (let i = 0; i < overflow.length; i += PAGE_SIZE) {
+		pages.push(
+			overflow.slice(i, i + PAGE_SIZE).map((poster) => ({ type: 'poster' as const, poster }))
+		);
+	}
+
+	return pages;
 }
 
 const ACID_HUES = [52, 85, 120, 165, 195, 280, 305, 330];
