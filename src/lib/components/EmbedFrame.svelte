@@ -77,7 +77,13 @@
 			<button class="btn" type="button" onclick={openOriginal}>Open original</button>
 		</div>
 	{/if}
-	<iframe {title} src={url} onload={onLoad} class:hidden={embedFailed}></iframe>
+	<iframe
+		{title}
+		src={url}
+		allow="camera *; microphone *; fullscreen *; accelerometer *; gyroscope *; magnetometer *; autoplay *"
+		onload={onLoad}
+		class:hidden={embedFailed}
+	></iframe>
 </div>
 
 <style>
