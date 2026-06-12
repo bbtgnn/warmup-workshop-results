@@ -111,4 +111,35 @@ describe('expandRows', () => {
 		const groups = loadGroups(SAMPLE_YAML);
 		expect(() => expandRows(rows, groups, normalizeUrl)).toThrow(/duplicate slug/i);
 	});
+
+	it('normalizes scheme-less URLs with https', () => {
+		const rows: SubvertCsvRow[] = [
+			{
+				groupSlug: 'studio-rombo',
+				title: 'No Scheme',
+				description: '',
+				links: ['example.com/page']
+			}
+		];
+		const groups = loadGroups(SAMPLE_YAML);
+		const posters = expandRows(rows, groups, normalizeUrl);
+		expect(posters).toHaveLength(1);
+		expect(posters[0].url).toBe('https://example.com/page');
+	});
+
+	it('skips invalid link but keeps valid link on same row', () => {
+		const rows: SubvertCsvRow[] = [
+			{
+				groupSlug: 'studio-rombo',
+				title: 'Mixed Links',
+				description: '',
+				links: ['', 'https://good.example.com/']
+			}
+		];
+		const groups = loadGroups(SAMPLE_YAML);
+		const posters = expandRows(rows, groups, normalizeUrl);
+		expect(posters).toHaveLength(1);
+		expect(posters[0].url).toBe('https://good.example.com/');
+		expect(posters[0].slug).toBe('mixed-links-2');
+	});
 });
