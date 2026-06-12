@@ -2,15 +2,15 @@
 	import { base } from '$app/paths';
 	import SubvertPoster from '$lib/components/SubvertPoster.svelte';
 	import SubvertTitleSlide from '$lib/components/SubvertTitleSlide.svelte';
-	import { posters, buildSubvertPages, randomSectionColors } from '$lib/subvert';
+	import { posters, buildSubvertGridPages, randomSectionColors } from '$lib/subvert';
 
 	let pageIndex = $state(0);
 
-	const pages = $derived(buildSubvertPages(posters));
+	const pages = $derived(buildSubvertGridPages(posters));
 	const visible = $derived(pages[pageIndex] ?? []);
 	const colors = $derived.by(() => {
 		pageIndex;
-		return randomSectionColors(visible.length || 3);
+		return randomSectionColors(6);
 	});
 	const atStart = $derived(pageIndex === 0);
 	const atEnd = $derived(pageIndex >= pages.length - 1);
@@ -39,7 +39,7 @@
 	<header class="topbar">
 		<div class="topbar-left">
 			<a class="btn" href="{base}/">← Gallery</a>
-			<a class="btn" href="{base}/subvert/grid">Grid view</a>
+			<a class="btn" href="{base}/subvert">Columns view</a>
 		</div>
 		<p class="desktop-hint">best on desktop</p>
 	</header>
@@ -50,12 +50,14 @@
 			<a class="btn" href="{base}/">Back to gallery</a>
 		</div>
 	{:else}
-		<div class="columns" style:--slot-count={visible.length}>
-			{#each visible as slot, i (`${pageIndex}-${i}-${slot.type === 'title' ? 'title' : slot.poster.slug}`)}
+		<div class="grid">
+			{#each visible as slot, i (`${pageIndex}-${i}-${slot.type === 'title' ? 'title' : slot.type === 'empty' ? 'empty' : slot.poster.slug}`)}
 				{#if slot.type === 'title'}
 					<SubvertTitleSlide />
-				{:else}
+				{:else if slot.type === 'poster'}
 					<SubvertPoster poster={slot.poster} background={colors[i]} />
+				{:else}
+					<div class="empty-cell" aria-hidden="true"></div>
 				{/if}
 			{/each}
 		</div>
@@ -100,13 +102,19 @@
 		color: var(--fg-muted);
 	}
 
-	.columns {
+	.grid {
 		flex: 1;
 		display: grid;
-		grid-template-columns: repeat(var(--slot-count, 3), 1fr);
+		grid-template-columns: repeat(3, 1fr);
+		grid-template-rows: repeat(2, 1fr);
 		gap: 0;
 		min-height: 0;
 		align-items: stretch;
+	}
+
+	.empty-cell {
+		min-width: 0;
+		min-height: 0;
 	}
 
 	.pager {

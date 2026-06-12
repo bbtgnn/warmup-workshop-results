@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { buildSubvertPages } from './subvert';
+import { buildSubvertPages, buildSubvertGridPages } from './subvert';
 import type { SubvertPoster } from './subvert';
 
 function poster(groupSlug: string, slug: string, linkIndex = 0): SubvertPoster {
@@ -49,5 +49,42 @@ describe('buildSubvertPages', () => {
 
 	it('returns empty array when there are no posters', () => {
 		expect(buildSubvertPages([])).toEqual([]);
+	});
+});
+
+describe('buildSubvertGridPages', () => {
+	const fiveGroups = [
+		poster('a', 'a-1'),
+		poster('a', 'a-2'),
+		poster('b', 'b-1'),
+		poster('c', 'c-1'),
+		poster('d', 'd-1'),
+		poster('e', 'e-1')
+	];
+
+	const emptySlots = Array.from({ length: 5 }, () => ({ type: 'empty' as const }));
+
+	it('puts title plus five first links on page one in row-major order', () => {
+		const pages = buildSubvertGridPages(fiveGroups);
+		expect(pages[0]).toEqual([
+			{ type: 'title' },
+			{ type: 'poster', poster: fiveGroups[0] },
+			{ type: 'poster', poster: fiveGroups[2] },
+			{ type: 'poster', poster: fiveGroups[3] },
+			{ type: 'poster', poster: fiveGroups[4] },
+			{ type: 'poster', poster: fiveGroups[5] }
+		]);
+	});
+
+	it('puts overflow posters top-left on page two with trailing empty slots', () => {
+		const pages = buildSubvertGridPages(fiveGroups);
+		expect(pages[1]).toEqual([
+			{ type: 'poster', poster: fiveGroups[1] },
+			...emptySlots
+		]);
+	});
+
+	it('returns empty array when there are no posters', () => {
+		expect(buildSubvertGridPages([])).toEqual([]);
 	});
 });

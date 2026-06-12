@@ -45,11 +45,11 @@ describe('makeSlug', () => {
 
 describe('resolvePreview', () => {
 	it('returns gif URL for existing file', () => {
-		expect(resolvePreview('collage-facce.gif')).toBe('/warmup-results/gifs/collage-facce.gif');
+		expect(resolvePreview('collage-facce.gif')).toBe('gifs/collage-facce.gif');
 	});
 
 	it('appends .gif when extension missing', () => {
-		expect(resolvePreview('collage-facce')).toBe('/warmup-results/gifs/collage-facce.gif');
+		expect(resolvePreview('collage-facce')).toBe('gifs/collage-facce.gif');
 	});
 
 	it('returns null for missing file', () => {

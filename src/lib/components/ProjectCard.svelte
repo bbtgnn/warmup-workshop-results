@@ -11,7 +11,7 @@
 	<div class="media">
 		{#if project.thumbnail && !imgError}
 			<img
-				src={project.thumbnail}
+				src="{base}/{project.thumbnail}"
 				alt="{project.title} preview"
 				onerror={() => (imgError = true)}
 			/>

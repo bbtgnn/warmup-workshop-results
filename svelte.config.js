@@ -9,7 +9,7 @@ const config = {
 			fallback: '404.html'
 		}),
 		paths: {
-			base: '/warmup-results'
+			base: '/warmup-workshop-results'
 		},
 		prerender: {
 			entries: ['*']

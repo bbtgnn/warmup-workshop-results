@@ -9,8 +9,6 @@ const CSV_PATH = join(ROOT, 'source.csv');
 const OUT_PATH = join(ROOT, 'src/lib/projects.json');
 const THUMB_DIR = join(ROOT, 'static/thumbnails');
 const GIF_DIR = join(ROOT, 'static/gifs');
-const BASE = '/warmup-results';
-
 export type Project = {
 	slug: string;
 	student: string;
@@ -58,7 +56,7 @@ function resolveSlugThumbnail(slug: string): string | null {
 	const exts = ['png', 'gif', 'webp'];
 	for (const ext of exts) {
 		const file = join(THUMB_DIR, `${slug}.${ext}`);
-		if (existsSync(file)) return `${BASE}/thumbnails/${slug}.${ext}`;
+		if (existsSync(file)) return `thumbnails/${slug}.${ext}`;
 	}
 	return null;
 }
@@ -72,7 +70,7 @@ export function resolvePreview(filename: string): string | null {
 		console.warn(`[build-projects] preview file not found: ${name}`);
 		return null;
 	}
-	return `${BASE}/gifs/${name}`;
+	return `gifs/${name}`;
 }
 
 function resolveThumbnail(slug: string, preview?: string): string | null {

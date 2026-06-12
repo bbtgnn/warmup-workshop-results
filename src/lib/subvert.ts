@@ -5,10 +5,16 @@ export type { SubvertPoster };
 export const posters: SubvertPoster[] = subvertData;
 
 const PAGE_SIZE = 3;
+export const GRID_SIZE = 6;
 
 export type SubvertSlot =
 	| { type: 'title' }
 	| { type: 'poster'; poster: SubvertPoster };
+
+export type SubvertGridSlot =
+	| { type: 'title' }
+	| { type: 'poster'; poster: SubvertPoster }
+	| { type: 'empty' };
 
 function groupPostersByTeam(items: SubvertPoster[]): SubvertPoster[][] {
 	const order: string[] = [];
@@ -47,6 +53,39 @@ export function buildSubvertPages(items: SubvertPoster[]): SubvertSlot[][] {
 		pages.push(
 			overflow.slice(i, i + PAGE_SIZE).map((poster) => ({ type: 'poster' as const, poster }))
 		);
+	}
+
+	return pages;
+}
+
+function padToGridSize(slots: SubvertGridSlot[]): SubvertGridSlot[] {
+	const padded: SubvertGridSlot[] = [...slots];
+	while (padded.length < GRID_SIZE) {
+		padded.push({ type: 'empty' });
+	}
+	return padded.slice(0, GRID_SIZE);
+}
+
+/** Page 1: title + first link per group (up to 5) in a 3×2 grid. Later pages: overflow links, 6 per page. */
+export function buildSubvertGridPages(items: SubvertPoster[]): SubvertGridSlot[][] {
+	if (items.length === 0) return [];
+
+	const groups = groupPostersByTeam(items);
+	const firstLinks = groups.map((group) => group[0]);
+	const overflow = groups.flatMap((group) => group.slice(1));
+	const pages: SubvertGridSlot[][] = [];
+
+	const pageOne: SubvertGridSlot[] = [
+		{ type: 'title' },
+		...firstLinks.slice(0, 5).map((poster) => ({ type: 'poster' as const, poster }))
+	];
+	pages.push(padToGridSize(pageOne));
+
+	for (let i = 0; i < overflow.length; i += GRID_SIZE) {
+		const chunk = overflow
+			.slice(i, i + GRID_SIZE)
+			.map((poster) => ({ type: 'poster' as const, poster }));
+		pages.push(padToGridSize(chunk));
 	}
 
 	return pages;

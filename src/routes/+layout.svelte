@@ -1,8 +1,11 @@
 <script lang="ts">
+	import { base } from '$app/paths';
+
 	let { children } = $props();
 </script>
 
 <svelte:head>
+	<link rel="icon" href="{base}/dumbbell.svg" type="image/svg+xml" />
 	<link rel="preconnect" href="https://fonts.googleapis.com" />
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
 	<link
