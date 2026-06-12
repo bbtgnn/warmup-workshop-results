@@ -1,7 +1,7 @@
 [
   {
-    "slug": "balloon-boy",
-    "title": "Balloon-boy",
+    "slug": "balloon-boycan-boy",
+    "title": "Balloon-boy/can-boy",
     "description": "",
     "url": "https://francescabrillanti-max.github.io/bimbi/",
     "groupSlug": "studio-rombo",
@@ -14,10 +14,24 @@
     ]
   },
   {
-    "slug": "balloon-boy-2",
-    "title": "Balloon-boy",
+    "slug": "balloon-boycan-boy-2",
+    "title": "Balloon-boy/can-boy",
     "description": "",
     "url": "https://remo1112.github.io/balloon/",
+    "groupSlug": "studio-rombo",
+    "teamName": "Studio Rombo",
+    "members": [
+      "Remo Spadone",
+      "Mourad Amadel",
+      "Francesca Brillanti",
+      "Tommaso Miconi"
+    ]
+  },
+  {
+    "slug": "balloon-boycan-boy-3",
+    "title": "Balloon-boy/can-boy",
+    "description": "",
+    "url": "https://tommasomiconi-star.github.io/bambino-palloncino/",
     "groupSlug": "studio-rombo",
     "teamName": "Studio Rombo",
     "members": [
@@ -56,8 +70,8 @@
     ]
   },
   {
-    "slug": "disneyinsanity",
-    "title": "Disneyinsanity",
+    "slug": "disney-insanity",
+    "title": "Disney Insanity",
     "description": "",
     "url": "https://jenny0225.github.io/disney_artwork/",
     "groupSlug": "studio-angolo",
