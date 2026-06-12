@@ -1,27 +1,13 @@
 <script lang="ts">
 	import { base } from '$app/paths';
 	import { goto } from '$app/navigation';
+	import EmbedFrame from '$lib/components/EmbedFrame.svelte';
 	import { getProject, randomSlug } from '$lib/projects';
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
 
 	const project = $derived(getProject(data.slug));
-
-	let loading = $state(true);
-	let embedFailed = $state(false);
-	let timeoutId: ReturnType<typeof setTimeout> | undefined;
-
-	$effect(() => {
-		data.slug;
-		loading = true;
-		embedFailed = false;
-		clearTimeout(timeoutId);
-		timeoutId = setTimeout(() => {
-			if (loading) embedFailed = true;
-		}, 5000);
-		return () => clearTimeout(timeoutId);
-	});
 
 	$effect(() => {
 		if (!project) return;
@@ -32,12 +18,6 @@
 			document.body.classList.remove('embed-viewer');
 		};
 	});
-
-	function onLoad() {
-		loading = false;
-		embedFailed = false;
-		clearTimeout(timeoutId);
-	}
 
 	function goRandom() {
 		const next = randomSlug(data.slug);
@@ -65,23 +45,7 @@
 			</div>
 		</header>
 
-		<div class="frame-wrap">
-			{#if loading}
-				<div class="overlay">Loading…</div>
-			{/if}
-			{#if embedFailed}
-				<div class="overlay error">
-					<p>Can't embed this project.</p>
-					<button class="btn" type="button" onclick={openOriginal}>Open original</button>
-				</div>
-			{/if}
-			<iframe
-				title={project.title}
-				src={project.url}
-				onload={onLoad}
-				class:hidden={embedFailed}
-			></iframe>
-		</div>
+		<EmbedFrame title={project.title} url={project.url} class="full-bleed" />
 	</div>
 {/if}
 
@@ -148,41 +112,16 @@
 		color: var(--bg);
 	}
 
-	.frame-wrap {
-		position: relative;
+	:global(.full-bleed.frame-wrap) {
 		flex: 1;
 		min-height: 0;
-		overflow: hidden;
+		aspect-ratio: unset;
+		height: 100%;
 		overscroll-behavior: none;
 		touch-action: none;
 	}
 
-	iframe {
-		width: 100%;
-		height: 100%;
-		border: 0;
-		display: block;
+	:global(.full-bleed.frame-wrap iframe) {
 		touch-action: none;
-	}
-
-	iframe.hidden {
-		visibility: hidden;
-	}
-
-	.overlay {
-		position: absolute;
-		inset: 0;
-		display: grid;
-		place-content: center;
-		gap: 1rem;
-		background: var(--bg);
-		font-weight: 700;
-		text-transform: uppercase;
-		letter-spacing: 0.08em;
-	}
-
-	.overlay.error p {
-		margin: 0;
-		text-align: center;
 	}
 </style>
