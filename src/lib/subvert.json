@@ -1,0 +1,73 @@
+[
+  {
+    "slug": "balloon-boy",
+    "title": "Balloon-boy",
+    "description": "",
+    "url": "https://francescabrillanti-max.github.io/bimbi/",
+    "groupSlug": "studio-rombo",
+    "teamName": "Studio Rombo",
+    "members": [
+      "Remo Spadone",
+      "Mourad Amadel",
+      "Francesca Brillanti",
+      "Tommaso Miconi"
+    ]
+  },
+  {
+    "slug": "balloon-boy-2",
+    "title": "Balloon-boy",
+    "description": "",
+    "url": "https://remo1112.github.io/balloon/",
+    "groupSlug": "studio-rombo",
+    "teamName": "Studio Rombo",
+    "members": [
+      "Remo Spadone",
+      "Mourad Amadel",
+      "Francesca Brillanti",
+      "Tommaso Miconi"
+    ]
+  },
+  {
+    "slug": "ilbusinessdeldolore",
+    "title": "Il_Business_del_dolore",
+    "description": "",
+    "url": "https://christianfoglia.github.io/Poster_Ilbusinessdeldolore_ZigZag/",
+    "groupSlug": "studio-zigzag",
+    "teamName": "Studio Zigzag",
+    "members": [
+      "Christian Foglia",
+      "Francesco Adamo",
+      "Ylenia Donati",
+      "Ludovico Di Buò"
+    ]
+  },
+  {
+    "slug": "il-respiro-del-circo",
+    "title": "il respiro del circo",
+    "description": "",
+    "url": "https://matsco01.github.io/manifesto-circo/",
+    "groupSlug": "studio-griglia",
+    "teamName": "Studio Griglia",
+    "members": [
+      "Martina Verna",
+      "Veronica Menichelli",
+      "Ashlyn Mochi",
+      "Matteo Scoccia"
+    ]
+  },
+  {
+    "slug": "siamo-alla-frutta",
+    "title": "SIAMO ALLA FRUTTA",
+    "description": "",
+    "url": "https://fmatellicani-prog.github.io/posterbananadefinitivo/",
+    "groupSlug": "studio-diagonale",
+    "teamName": "Studio Diagonale",
+    "members": [
+      "Filippo Matellicani",
+      "Francesco di Cicco",
+      "Andrea Corsalini",
+      "Andrea Prifti",
+      "Marica Cappa"
+    ]
+  }
+]

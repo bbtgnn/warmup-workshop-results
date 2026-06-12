@@ -1,0 +1,38 @@
+groups:
+  - slug: "studio-rombo"
+    name: "Studio Rombo"
+    users:
+      - "Remo Spadone"
+      - "Mourad Amadel"
+      - "Francesca Brillanti"
+      - "Tommaso Miconi"
+  - slug: "studio-zigzag"
+    name: "Studio Zigzag"
+    users:
+      - "Christian Foglia"
+      - "Francesco Adamo"
+      - "Ylenia Donati"
+      - "Ludovico Di Buò"
+  - slug: "studio-griglia"
+    name: "Studio Griglia"
+    users:
+      - "Martina Verna"
+      - "Veronica Menichelli"
+      - "Ashlyn Mochi"
+      - "Matteo Scoccia"
+  - slug: "studio-angolo"
+    name: "Studio Angolo"
+    users:
+      - "Claudia Corso"
+      - "Donatella Salgemma"
+      - "Meirosu Claudia"
+      - "Alexander Hristo Marinov"
+      - "Jenny Romagnoli"
+  - slug: "studio-diagonale"
+    name: "Studio Diagonale"
+    users:
+      - "Filippo Matellicani"
+      - "Francesco di Cicco"
+      - "Andrea Corsalini"
+      - "Andrea Prifti"
+      - "Marica Cappa"
