@@ -1,93 +1,233 @@
 [
   {
     "slug": "veronica-menichelli-cuore-a-cuore",
-    "student": "VERONICA MENICHELLI",
+    "student": "Veronica Menichelli",
     "title": "cuore a cuore",
-    "url": "https://menichelliv05-beep.github.io/poster-uccelli/",
+    "url": "https://menichelliv05-beep.github.io/poster-uccelli/,SI",
     "thumbnail": null
   },
   {
     "slug": "donatella-salgemma-capacita-massima",
-    "student": "DONATELLA SALGEMMA",
+    "student": "Donatella Salgemma",
     "title": "Capacità massima",
-    "url": "https://donatella-hub.github.io/POSTER_1/",
+    "url": "https://donatella-hub.github.io/POSTER_1/,SI",
     "thumbnail": null
   },
   {
     "slug": "claudia-corso-casa-balla",
     "student": "Claudia Corso",
     "title": "Casa Balla",
-    "url": "https://ccorso-cloud.github.io/casa-balla/",
+    "url": "https://ccorso-cloud.github.io/casa-balla/,SI/NO",
     "thumbnail": null
   },
   {
     "slug": "francesca-brillanti-collage-facce",
     "student": "Francesca Brillanti",
     "title": "Collage Facce",
-    "url": "https://francescabrillanti-max.github.io/collage-facce/",
+    "url": "https://francescabrillanti-max.github.io/collage-facce/,SI (così no loop)",
     "thumbnail": null
   },
   {
     "slug": "francesca-brillanti-pixel-art",
     "student": "Francesca Brillanti",
     "title": "Pixel Art",
-    "url": "https://francescabrillanti-max.github.io/animation-pixel/",
+    "url": "https://francescabrillanti-max.github.io/animation-pixel/,SI",
     "thumbnail": null
   },
   {
     "slug": "spadone-remo-poster-generator",
     "student": "Spadone Remo",
     "title": "Poster Generator",
-    "url": "https://remo1112.github.io/poster-design/",
-    "thumbnail": null
-  },
-  {
-    "slug": "claudia-meirosu-tanti-fanculo",
-    "student": "Claudia Meirosu",
-    "title": "Tanti fanculo",
-    "url": "https://clxudia21.github.io/tired/",
+    "url": "https://remo1112.github.io/poster-design/,SI",
     "thumbnail": null
   },
   {
     "slug": "ylenia-donati-crea-il-tuo-panino",
     "student": "Ylenia Donati",
     "title": "Crea il tuo panino",
-    "url": "https://ylly22.github.io/poster-panino/",
+    "url": "https://ylly22.github.io/poster-panino/,SI",
     "thumbnail": null
   },
   {
     "slug": "ludovico-di-buo-brutalism",
     "student": "Ludovico Di Buò",
     "title": "Brutalism",
-    "url": "https://ludovico-xiv.github.io/poster1/",
+    "url": "https://ludovico-xiv.github.io/poster1/,NO",
     "thumbnail": null
   },
   {
     "slug": "christian-foglia-music-visual",
     "student": "Christian Foglia",
     "title": "Music Visual",
-    "url": "https://christianfoglia.github.io/Music-Visual/",
+    "url": "https://christianfoglia.github.io/Music-Visual/,NO",
     "thumbnail": null
   },
   {
     "slug": "christian-foglia-lsd",
     "student": "Christian Foglia",
     "title": "Lsd",
-    "url": "https://christianfoglia.github.io/lsd-poster/",
+    "url": "https://christianfoglia.github.io/lsd-poster/,NO",
     "thumbnail": null
   },
   {
     "slug": "tommaso-miconi-we-are-looking",
     "student": "Tommaso Miconi",
     "title": "We are looking",
-    "url": "https://tommasomiconi-star.github.io/eyes/title.html",
+    "url": "https://tommasomiconi-star.github.io/eyes/title.html,SI/NO",
     "thumbnail": null
   },
   {
-    "slug": "ashlyn-mochi-14",
+    "slug": "ashlyn-mochi-felicita-facile",
     "student": "Ashlyn Mochi",
-    "title": "Untitled",
-    "url": "https://ashlynmochi.github.io/poster-ash/",
+    "title": "Felicità facile?",
+    "url": "https://ashlynmochi.github.io/poster-ash/,NO",
+    "thumbnail": null
+  },
+  {
+    "slug": "francesco-di-cicco-how-to-disappear-completely",
+    "student": "Francesco di Cicco",
+    "title": "How to disappear completely",
+    "url": "https://github.com/fdcfrancescodicicco-coder/poster,SI/NO",
+    "thumbnail": null
+  },
+  {
+    "slug": "tommaso-miconi-il-riccettario",
+    "student": "Tommaso Miconi",
+    "title": "IL RICCETTARIO",
+    "url": "https://tommasomiconi-star.github.io/ricettario/,SI/NO",
+    "thumbnail": null
+  },
+  {
+    "slug": "tommaso-miconi-facciaccie-esplose",
+    "student": "Tommaso Miconi",
+    "title": "Facciaccie esplose",
+    "url": "https://tommasomiconi-star.github.io/faccie/,SI/NO",
+    "thumbnail": null
+  },
+  {
+    "slug": "francesco-adamo-lorem-ipsum-animated-type-poster",
+    "student": "Francesco Adamo",
+    "title": "Lorem Ipsum - Animated Type Poster",
+    "url": "https://adamsnotdeveloped.github.io/Poster/,NO",
+    "thumbnail": null
+  },
+  {
+    "slug": "filippo-matellicani-warmup",
+    "student": "Filippo Matellicani",
+    "title": "WARMUP",
+    "url": "https://fmatellicani-prog.github.io/posterabamcwarmup/,SI",
+    "thumbnail": null
+  },
+  {
+    "slug": "martina-verna-arrostitetris",
+    "student": "Martina Verna",
+    "title": "Arrostitetris",
+    "url": "https://martinaverna2002.github.io/arrostitetris/,SI",
+    "thumbnail": null
+  },
+  {
+    "slug": "jenny-romagnoli-handpose",
+    "student": "Jenny Romagnoli",
+    "title": "HANDPOSE",
+    "url": "https://jenny0225.github.io/drawing_hands/,SI",
+    "thumbnail": null
+  },
+  {
+    "slug": "mourad-amadel-feel-dizzy",
+    "student": "Mourad Amadel",
+    "title": "Feel Dizzy?",
+    "url": "https://muddiwings.github.io/feel-dizzy/,SI/NO",
+    "thumbnail": null
+  },
+  {
+    "slug": "mourad-amadel-pixelss",
+    "student": "Mourad Amadel",
+    "title": "Pixelss",
+    "url": "https://muddiwings.github.io/pixel/,",
+    "thumbnail": null
+  },
+  {
+    "slug": "mourad-amadel-horse-skeleton",
+    "student": "Mourad Amadel",
+    "title": "Horse-skeleton",
+    "url": "https://muddiwings.github.io/horse/,",
+    "thumbnail": null
+  },
+  {
+    "slug": "andrea-prifti-skate-and-destroy",
+    "student": "Andrea Prifti",
+    "title": "Skate and Destroy!",
+    "url": "https://aprifti-t.github.io/Poster-Skate/,NO",
+    "thumbnail": null
+  },
+  {
+    "slug": "andrea-prifti-viola-cam",
+    "student": "Andrea Prifti",
+    "title": "Viola Cam",
+    "url": "https://aprifti-t.github.io/Viola-Cam-1/,SI",
+    "thumbnail": null
+  },
+  {
+    "slug": "corsalini-andrea-minacce",
+    "student": "Corsalini Andrea",
+    "title": "MINACCE",
+    "url": "https://corsaliniandrea-hash.github.io/minacce/,NO",
+    "thumbnail": null
+  },
+  {
+    "slug": "corsalini-andrea-palle",
+    "student": "Corsalini Andrea",
+    "title": "Palle",
+    "url": "https://corsaliniandrea-hash.github.io/palle/post.html,NO",
+    "thumbnail": null
+  },
+  {
+    "slug": "marica-cappa-noia",
+    "student": "Marica Cappa",
+    "title": "Noia",
+    "url": "https://cappi-monel.github.io/noia/,SI",
+    "thumbnail": null
+  },
+  {
+    "slug": "marica-cappa-caps",
+    "student": "Marica Cappa",
+    "title": "CAPS",
+    "url": "https://cappi-monel.github.io/designer/,NO",
+    "thumbnail": null
+  },
+  {
+    "slug": "matteo-scoccia",
+    "student": "Matteo",
+    "title": "Scoccia",
+    "url": "https://matsco01.github.io/asciicam/,Si",
+    "thumbnail": null
+  },
+  {
+    "slug": "claudia-meirosu-stalker",
+    "student": "Claudia Meirosu",
+    "title": "Stalker",
+    "url": "https://clxudia21.github.io/occhi/,",
+    "thumbnail": null
+  },
+  {
+    "slug": "claudia-meirosu-effetti-glitch-simpatici",
+    "student": "Claudia Meirosu",
+    "title": "Effetti glitch simpatici",
+    "url": "https://clxudia21.github.io/teschio/,",
+    "thumbnail": null
+  },
+  {
+    "slug": "claudia-meirosu-deep-web-creepy",
+    "student": "Claudia Meirosu",
+    "title": "Deep web creepy",
+    "url": "https://clxudia21.github.io/darkkk/,SI/NO",
+    "thumbnail": null
+  },
+  {
+    "slug": "claudia-meirosu-tanti-fanculo",
+    "student": "Claudia Meirosu",
+    "title": "Tanti fanculo",
+    "url": "https://clxudia21.github.io/tired/,",
     "thumbnail": null
   }
 ]
