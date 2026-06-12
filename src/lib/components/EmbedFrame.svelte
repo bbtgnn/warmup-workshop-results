@@ -29,6 +29,7 @@
 
 	$effect(() => {
 		containSize;
+		frameWrap;
 		if (!frameWrap || !containSize) return;
 
 		updateContainScale();
