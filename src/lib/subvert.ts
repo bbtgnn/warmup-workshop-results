@@ -4,6 +4,17 @@ import type { SubvertPoster } from '../../scripts/build-subvert';
 export type { SubvertPoster };
 export const posters: SubvertPoster[] = subvertData;
 
+export type EmbedContainSize = { width: number; height: number };
+
+/** Native page size for portrait embeds that need scale-to-fit in landscape frames. */
+const EMBED_CONTAIN_SIZES: Record<string, EmbedContainSize> = {
+	'siamo-alla-frutta': { width: 601, height: 889 }
+};
+
+export function getEmbedContainSize(slug: string): EmbedContainSize | null {
+	return EMBED_CONTAIN_SIZES[slug] ?? null;
+}
+
 const PAGE_SIZE = 3;
 export const GRID_SIZE = 6;
 

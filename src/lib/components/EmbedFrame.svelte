@@ -1,17 +1,41 @@
 <script lang="ts">
+	import type { EmbedContainSize } from '$lib/subvert';
+
 	let {
 		title,
 		url,
-		class: className = ''
+		class: className = '',
+		containSize = null
 	}: {
 		title: string;
 		url: string;
 		class?: string;
+		containSize?: EmbedContainSize | null;
 	} = $props();
 
+	let frameWrap: HTMLDivElement | undefined;
 	let loading = $state(true);
 	let embedFailed = $state(false);
+	let containScale = $state(1);
 	let timeoutId: ReturnType<typeof setTimeout> | undefined;
+
+	function updateContainScale() {
+		if (!frameWrap || !containSize) return;
+		containScale = Math.min(
+			frameWrap.clientWidth / containSize.width,
+			frameWrap.clientHeight / containSize.height
+		);
+	}
+
+	$effect(() => {
+		containSize;
+		if (!frameWrap || !containSize) return;
+
+		updateContainScale();
+		const ro = new ResizeObserver(() => updateContainScale());
+		ro.observe(frameWrap);
+		return () => ro.disconnect();
+	});
 
 	$effect(() => {
 		url;
@@ -35,7 +59,14 @@
 	}
 </script>
 
-<div class="frame-wrap {className}">
+<div
+	class="frame-wrap {className}"
+	class:fit-contain={containSize !== null}
+	bind:this={frameWrap}
+	style:--contain-scale={containScale}
+	style:--content-width="{containSize?.width ?? 0}px"
+	style:--content-height="{containSize?.height ?? 0}px"
+>
 	{#if loading}
 		<div class="overlay">Loading…</div>
 	{/if}
@@ -69,6 +100,16 @@
 		height: 100%;
 		border: 0;
 		display: block;
+	}
+
+	.fit-contain iframe {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		width: var(--content-width);
+		height: var(--content-height);
+		transform: translate(-50%, -50%) scale(var(--contain-scale));
+		transform-origin: center center;
 	}
 
 	iframe.hidden {

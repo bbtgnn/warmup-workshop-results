@@ -2,7 +2,12 @@
 	import { base } from '$app/paths';
 	import SubvertPoster from '$lib/components/SubvertPoster.svelte';
 	import SubvertTitleSlide from '$lib/components/SubvertTitleSlide.svelte';
-	import { posters, buildSubvertGridPages, randomSectionColors } from '$lib/subvert';
+	import {
+		posters,
+		buildSubvertGridPages,
+		getEmbedContainSize,
+		randomSectionColors
+	} from '$lib/subvert';
 
 	let pageIndex = $state(0);
 
@@ -55,7 +60,11 @@
 				{#if slot.type === 'title'}
 					<SubvertTitleSlide />
 				{:else if slot.type === 'poster'}
-					<SubvertPoster poster={slot.poster} background={colors[i]} />
+					<SubvertPoster
+						poster={slot.poster}
+						background={colors[i]}
+						containSize={getEmbedContainSize(slot.poster.slug)}
+					/>
 				{:else}
 					<div class="empty-cell" aria-hidden="true"></div>
 				{/if}

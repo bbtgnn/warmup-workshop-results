@@ -1,13 +1,15 @@
 <script lang="ts">
 	import EmbedFrame from '$lib/components/EmbedFrame.svelte';
-	import type { SubvertPoster } from '$lib/subvert';
+	import type { EmbedContainSize, SubvertPoster } from '$lib/subvert';
 
 	let {
 		poster,
-		background
+		background,
+		containSize = null
 	}: {
 		poster: SubvertPoster;
 		background: string;
+		containSize?: EmbedContainSize | null;
 	} = $props();
 
 	const displayTitle = $derived(poster.title.trim() || 'Untitled');
@@ -15,7 +17,7 @@
 </script>
 
 <section class="column" style:background>
-	<EmbedFrame title={displayTitle} url={poster.url} class="fill-column" />
+	<EmbedFrame title={displayTitle} url={poster.url} class="fill-column" {containSize} />
 	<div class="meta">
 		<h1>{displayTitle}</h1>
 		<h3>{poster.teamName}</h3>
